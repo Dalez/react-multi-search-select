@@ -1,10 +1,10 @@
-.react-multi-select-container {
+.react-multi-search-select-container {
   position: relative;
   width: 100%;
   background: #ffffff;
 }
 
-.react-multi-select-search-wrapper {
+.react-multi-search-select-search-wrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -14,17 +14,17 @@
   border-radius: 0.25em;
 }
 
-.react-multi-select-loading {
+.react-multi-search-select-loading {
   display: flex;
   align-items: center;
   margin-bottom: 0.3em;
 }
 
-.react-multi-select-loading > span {
+.react-multi-search-select-loading > span {
   margin-left: 0.5em;
 }
 
-.react-multi-select-container input {
+.react-multi-search-select-container input {
   flex: 1;
   height: 1.5em;
   margin-bottom: 0.3em;
@@ -32,11 +32,11 @@
   background: #ffffff;
 }
 
-.react-multi-select-container input:focus {
+.react-multi-search-select-container input:focus {
   outline: none;
 }
 
-.react-multi-select-selected-option {
+.react-multi-search-select-selected-option {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,11 +54,11 @@
   cursor: pointer;
 }
 
-.react-multi-select-selected-option:hover {
+.react-multi-search-select-selected-option:hover {
   background: #a6d3ee;
 }
 
-.react-multi-select-options-container {
+.react-multi-search-select-options-container {
   display: none;
   position: absolute;
   width: 100%;
@@ -67,11 +67,11 @@
   z-index: 2;
 }
 
-.react-multi-select-options-container.active  {
+.react-multi-search-select-options-container.active  {
   display: block;
 }
 
-.react-multi-select-options-container ul {
+.react-multi-search-select-options-container ul {
   display: block;
   max-height: 15em;
   margin: 0;
@@ -82,11 +82,11 @@
   overflow-y: auto;
 }
 
-.react-multi-select-options-container li {
+.react-multi-search-select-options-container li {
   padding: 0.5em;
 }
 
-.react-multi-select-options-container li:not(.no-hover):hover {
+.react-multi-search-select-options-container li:not(.no-hover):hover {
   background: #90c8ea;
   color: #ffffff;
   cursor: pointer;

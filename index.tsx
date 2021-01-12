@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {ReactMultiSelect} from "./src";
+import {ReactMultiSearchSelect} from "./src";
 
 ReactDOM.render(
-  <ReactMultiSelect
+  <ReactMultiSearchSelect
     options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
     optionKey="name"
   />,
@@ -11,6 +11,6 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
-  <ReactMultiSelect options={["test", "test2", "test3"]} />,
+  <ReactMultiSearchSelect options={["test", "test2", "test3"]} />,
   document.getElementById("string-anchor")
 );

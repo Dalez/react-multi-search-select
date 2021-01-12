@@ -1,20 +1,20 @@
-# REACT MULTI SELECT 
+# React Multi Search Select
 
 A fully tested Typescript React component that shows a multi select searchable dropdown.
 
 ## Installation
 ```
-yarn add react-multi-select
+yarn add react-multi-search-select
 ```
 ```
-npm install react-multi-select
+npm install react-multi-search-select
 ```
 ----
 
 ## Usage
 ```ts
 import React, { ReactElement } from 'react';
-import { ReactMultiSelect } from 'react-multi-select';
+import { ReactMultiSelect } from 'react-multi-search-select';
 
 export const Component = (): ReactElement => {
   const onChange = (options: Option[]): void => {
@@ -60,19 +60,19 @@ You can override each class as needed. The names are "name spaced" so that they 
 
 | Class | Description
 |:--------- | :----
-| `react-multi-select-container` | Container for the whole component
-| `react-multi-select-search-wrapper` | Wrapper for the search input
-| `react-multi-select-loading` | Container for loading elements
-| `react-multi-select-loading > span` | Loading text
-| `react-multi-select-container input` | Search input
-| `react-multi-select-container input:focus` | Search input focus
-| `react-multi-select-selected-option` | Selected options next to the search input
-| `react-multi-select-selected-option:hover` | Selected options hover
-| `react-multi-select-options-container` | Container for options to select
-| `react-multi-select-options-container.active` | Container when its active (showing)
-| `react-multi-select-options-container ul` | List for options to select
-| `react-multi-select-options-container li` | Option to select
-| `react-multi-select-options-container li:not(.no-hover):hover` | No options text (for no hover effect)
+| `react-multi-search-select-container` | Container for the whole component
+| `react-multi-search-select-search-wrapper` | Wrapper for the search input
+| `react-multi-search-select-loading` | Container for loading elements
+| `react-multi-search-select-loading > span` | Loading text
+| `react-multi-search-select-container input` | Search input
+| `react-multi-search-select-container input:focus` | Search input focus
+| `react-multi-search-select-selected-option` | Selected options next to the search input
+| `react-multi-search-select-selected-option:hover` | Selected options hover
+| `react-multi-search-select-options-container` | Container for options to select
+| `react-multi-search-select-options-container.active` | Container when its active (showing)
+| `react-multi-search-select-options-container ul` | List for options to select
+| `react-multi-search-select-options-container li` | Option to select
+| `react-multi-search-select-options-container li:not(.no-hover):hover` | No options text (for no hover effect)
 
 ----
 

@@ -15,7 +15,7 @@ interface Props {
   caseSensitiveSearch?: boolean;
 }
 
-export const ReactMultiSelect = (props: Props): ReactElement => {
+export const ReactMultiSearchSelect = (props: Props): ReactElement => {
   const [showOptions, setShowOptions] = useState<boolean>();
   const [search, setSearch] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
@@ -45,7 +45,7 @@ export const ReactMultiSelect = (props: Props): ReactElement => {
 
   const renderLoading = (): ReactNode => {
     return (
-      <div className="react-multi-select-loading">
+      <div className="react-multi-search-select-loading">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 38 38" stroke="#fff">
           <g fill="none">
             <g transform="translate(1 1)" strokeWidth="2">
@@ -71,7 +71,7 @@ export const ReactMultiSelect = (props: Props): ReactElement => {
 
   const renderSelectedOptions = (): ReactNode => {
     return selectedOptions.map((option: Option, index: number) => (
-      <button key={index} className="react-multi-select-selected-option" onClick={() => removeOption(option)}>
+      <button key={index} className="react-multi-search-select-selected-option" onClick={() => removeOption(option)}>
         {props.optionKey ? option[props.optionKey] : option}
       </button>
     ));
@@ -96,8 +96,8 @@ export const ReactMultiSelect = (props: Props): ReactElement => {
   const selectionLimitReached: boolean = selectedOptions.length >= props.selectionLimit;
 
   return (
-    <div className="react-multi-select-container">
-      <div className="react-multi-select-search-wrapper">
+    <div className="react-multi-search-select-container">
+      <div className="react-multi-search-select-search-wrapper">
         {props.loading && renderLoading()}
 
         {renderSelectedOptions()}
@@ -115,7 +115,7 @@ export const ReactMultiSelect = (props: Props): ReactElement => {
         />}
       </div>
 
-      <div className={"react-multi-select-options-container" + (showOptions ? " active" : "")} aria-hidden={!showOptions}>
+      <div className={"react-multi-search-select-options-container" + (showOptions ? " active" : "")} aria-hidden={!showOptions}>
         {renderOptions()}
       </div>
     </div>

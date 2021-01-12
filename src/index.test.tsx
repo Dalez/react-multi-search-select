@@ -1,22 +1,22 @@
 import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from '@testing-library/user-event'
-import { ReactMultiSelect } from "./Index";
+import { ReactMultiSearchSelect } from "./Index";
 
-it("renders React Multi Select", (): void => {
-  render(<ReactMultiSelect options={[]} />);
+it("renders React Multi Search Select", (): void => {
+  render(<ReactMultiSearchSelect options={[]} />);
 
   expect(screen.getByRole("textbox")).toBeInTheDocument();
 });
 
 it("renders loading spinner", (): void => {
-  render(<ReactMultiSelect options={[]} loading={true} />);
+  render(<ReactMultiSearchSelect options={[]} loading={true} />);
 
   expect(screen.getByText("Loading...")).toBeInTheDocument();
 });
 
 it("shows array options when clicking on input field", (): void => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
 
   userEvent.click(screen.getByRole("textbox"));
 
@@ -26,7 +26,7 @@ it("shows array options when clicking on input field", (): void => {
 });
 
 it("shows object options when clicking on input field", (): void => {
-  render(<ReactMultiSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionKey="id" />);
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionKey="id" />);
 
   userEvent.click(screen.getByRole("textbox"));
 
@@ -36,7 +36,7 @@ it("shows object options when clicking on input field", (): void => {
 });
 
 it("hides options when clicking on input field then blurring", async (): Promise<void> => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(document.body);
@@ -45,7 +45,7 @@ it("hides options when clicking on input field then blurring", async (): Promise
 });
 
 it("selects array option", (): void => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(screen.getAllByRole("listitem")[0]);
@@ -56,7 +56,7 @@ it("selects array option", (): void => {
 });
 
 it("selects object option", (): void => {
-  render(<ReactMultiSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionKey="id" />);
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionKey="id" />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(screen.getAllByRole("listitem")[0]);
@@ -70,7 +70,7 @@ it("calls on change callback when selected options are changed", (): void => {
   const props = {options: ["option 1", "option 2"], onChange: jest.fn()};
   const spy = jest.spyOn(props, "onChange");
 
-  render(<ReactMultiSelect {...props} />);
+  render(<ReactMultiSearchSelect {...props} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(screen.getAllByRole("listitem")[0]);
@@ -79,7 +79,7 @@ it("calls on change callback when selected options are changed", (): void => {
 });
 
 it("deselects option", (): void => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(screen.getAllByRole("listitem")[0]);
@@ -90,7 +90,7 @@ it("deselects option", (): void => {
 });
 
 it("shows options based on search", (): void => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.type(screen.getByRole("textbox"), "option 2");
@@ -100,7 +100,7 @@ it("shows options based on search", (): void => {
 });
 
 it("shows options based on case sensitive search", (): void => {
-  render(<ReactMultiSelect options={["Option 1", "option 2"]} caseSensitiveSearch={true} />);
+  render(<ReactMultiSearchSelect options={["Option 1", "option 2"]} caseSensitiveSearch={true} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.type(screen.getByRole("textbox"), "Option");
@@ -110,7 +110,7 @@ it("shows options based on case sensitive search", (): void => {
 });
 
 it("disabled input box when selection limit is reached", (): void => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} selectionLimit={1} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} selectionLimit={1} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(screen.getAllByRole("listitem")[0]);
@@ -119,19 +119,19 @@ it("disabled input box when selection limit is reached", (): void => {
 });
 
 it("shows input box as disabled when passed through props", (): void => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} disabled={true} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} disabled={true} />);
 
   expect(screen.getByRole("textbox")).toBeDisabled();
 });
 
 it("shows defined placeholder text", (): void => {
-  render(<ReactMultiSelect options={["option 1", "option 2"]} placeholderText="Test placeholder text" />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} placeholderText="Test placeholder text" />);
 
   expect(screen.getByPlaceholderText("Test placeholder text")).toBeInTheDocument();
 });
 
 it("shows defined no options text", (): void => {
-  render(<ReactMultiSelect options={[]} noOptionsText="Test no options text" />);
+  render(<ReactMultiSearchSelect options={[]} noOptionsText="Test no options text" />);
 
   userEvent.click(screen.getByRole("textbox"));
 
