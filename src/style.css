@@ -1,0 +1,93 @@
+.react-multi-select-container {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+}
+
+.react-multi-select-search-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  padding: 0.3em 0.3em 0;
+  border: 1px solid #cccccc;
+  border-radius: 0.25em;
+}
+
+.react-multi-select-loading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3em;
+}
+
+.react-multi-select-loading > span {
+  margin-left: 0.5em;
+}
+
+.react-multi-select-container input {
+  flex: 1;
+  height: 1.5em;
+  margin-bottom: 0.3em;
+  border: none;
+  background: #ffffff;
+}
+
+.react-multi-select-container input:focus {
+  outline: none;
+}
+
+.react-multi-select-selected-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3em 0.6em;
+  background: #90c8ea;
+  margin-right: 0.3em;
+  margin-bottom: 0.3em;
+  border-radius: 0.25em;
+  appearance: none;
+  border: 0;
+  outline-color: #50a8de;
+  font-size: 14px;
+  color: #ffffff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.react-multi-select-selected-option:hover {
+  background: #a6d3ee;
+}
+
+.react-multi-select-options-container {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 0.25em;
+  z-index: 2;
+}
+
+.react-multi-select-options-container.active  {
+  display: block;
+}
+
+.react-multi-select-options-container ul {
+  display: block;
+  max-height: 15em;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #cccccc;
+  list-style: none;
+  border-radius: 0.25em;
+  overflow-y: auto;
+}
+
+.react-multi-select-options-container li {
+  padding: 0.5em;
+}
+
+.react-multi-select-options-container li:not(.no-hover):hover {
+  background: #90c8ea;
+  color: #ffffff;
+  cursor: pointer;
+}
