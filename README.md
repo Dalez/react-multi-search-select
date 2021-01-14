@@ -14,7 +14,7 @@ npm install react-multi-search-select
 ## Usage
 ```ts
 import React, { ReactElement } from 'react';
-import { ReactMultiSelect } from 'react-multi-search-select';
+import { ReactMultiSearchSelect } from 'react-multi-search-select';
 
 export const Component = (): ReactElement => {
   const onChange = (options: Option[]): void => {
@@ -23,9 +23,9 @@ export const Component = (): ReactElement => {
   
   return (
     <>
-      <ReactMultiSelect options={["test", "test2", "test3"]} onChange={onChange} />
+      <ReactMultiSearchSelect options={["test", "test2", "test3"]} onChange={onChange} />
 
-      <ReactMultiSelect
+      <ReactMultiSearchSelect
         options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
         optionKey="name"
         onChange={onChange}
