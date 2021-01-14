@@ -1,6 +1,6 @@
 {
   "name": "react-multi-search-select",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "src/index.tsx",
   "author": "Dale Rushin <support@dalerushin.co.uk>",
   "license": "MIT",
