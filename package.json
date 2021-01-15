@@ -1,6 +1,6 @@
 {
   "name": "react-multi-search-select",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "build/index.js",
   "author": "Dale Rushin <support@dalerushin.co.uk>",
   "description": "A fully tested Typescript React component that shows a multi select searchable dropdown",
