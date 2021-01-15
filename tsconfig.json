@@ -3,7 +3,6 @@
     "jsx": "react",
     "esModuleInterop": true,
     "target": "es5",
-    "lib": ["es2016", "dom"],
-    "outDir": "lib"
+    "lib": ["es2016", "dom"]
   }
 }

@@ -2,6 +2,7 @@ var path = require('path');
 
 module.exports = {
   mode: 'production',
+  target: "es5",
   entry: './src/index.tsx',
   output: {
     path: path.resolve('build'),
