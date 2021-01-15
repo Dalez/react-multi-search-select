@@ -3,6 +3,11 @@
   "version": "1.0.2",
   "main": "src/index.tsx",
   "author": "Dale Rushin <support@dalerushin.co.uk>",
+  "description": "A fully tested Typescript React component that shows a multi select searchable dropdown",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dalez/react-multi-search-select"
+  },
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
@@ -27,6 +32,10 @@
     "react-dom": "^17.0.1",
     "style.css": "^1.0.0"
   },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "jest": {
     "preset": "ts-jest",
     "moduleFileExtensions": [
@@ -47,5 +56,18 @@
       "html",
       "text"
     ]
-  }
+  },
+  "keywords": [
+    "react",
+    "dropdown",
+    "multi select",
+    "multi search",
+    "multi search select",
+    "dropdown search", ,,
+    "react-multi-search-select",
+    "react multi search select",
+    "react multisearch select",
+    "react multiselect",
+    "react multi select"
+  ]
 }
