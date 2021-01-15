@@ -1,7 +1,7 @@
 {
   "name": "react-multi-search-select",
   "version": "1.0.3",
-  "main": "src/index.tsx",
+  "main": "build/index.js",
   "author": "Dale Rushin <support@dalerushin.co.uk>",
   "description": "A fully tested Typescript React component that shows a multi select searchable dropdown",
   "repository": {
@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build src/index.tsx",
+    "build": "webpack",
     "test": "jest --coverage"
   },
   "devDependencies": {
@@ -21,16 +21,19 @@
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "cssnano": "^4.1.10",
+    "css-loader": "^5.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
+    "style-loader": "^2.0.0",
     "ts-jest": "^26.4.4",
-    "typescript": "^4.1.3"
+    "ts-loader": "^8.0.14",
+    "typescript": "^4.1.3",
+    "webpack": "^5.14.0",
+    "webpack-cli": "^4.3.1"
   },
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "style.css": "^1.0.0"
+    "react-dom": "^17.0.1"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
