@@ -7,3 +7,5 @@ index.tsx
 coverage
 .idea
 node_modules
+dist
+.cache

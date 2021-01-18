@@ -26,13 +26,13 @@ it("shows array options when clicking on input field", (): void => {
 });
 
 it("shows object options when clicking on input field", (): void => {
-  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionKey="id" />);
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionsObject={{key: "id", value: "name"}} />);
 
   userEvent.click(screen.getByRole("textbox"));
 
   expect(screen.getAllByRole("listitem").length).toEqual(2);
-  expect(screen.getByText("1")).toBeInTheDocument();
-  expect(screen.getByText("2")).toBeInTheDocument();
+  expect(screen.getByText("option 1")).toBeInTheDocument();
+  expect(screen.getByText("option 2")).toBeInTheDocument();
 });
 
 it("hides options when clicking on input field then blurring", async (): Promise<void> => {
@@ -51,31 +51,39 @@ it("selects array option", (): void => {
   userEvent.click(screen.getAllByRole("listitem")[0]);
 
   expect(screen.getAllByRole("listitem").length).toEqual(1);
-  expect(screen.getByRole("button")).toBeInTheDocument();
-  expect(screen.getByText("option 1")).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /option 1/i })).toBeInTheDocument();
 });
 
 it("selects object option", (): void => {
-  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionKey="id" />);
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionsObject={{key: "id", value: "name"}} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(screen.getAllByRole("listitem")[0]);
 
   expect(screen.getAllByRole("listitem").length).toEqual(1);
-  expect(screen.getByRole("button")).toBeInTheDocument();
-  expect(screen.getByText("1")).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: /option 1/i })).toBeInTheDocument();
 });
 
 it("calls on change callback when selected options are changed", (): void => {
-  const props = {options: ["option 1", "option 2"], onChange: jest.fn()};
-  const spy = jest.spyOn(props, "onChange");
+  const onChange = jest.fn();
 
-  render(<ReactMultiSearchSelect {...props} />);
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} onChange={onChange} />);
 
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(screen.getAllByRole("listitem")[0]);
 
-  expect(spy).toBeCalledWith(["option 1"]);
+  expect(onChange).toBeCalledWith(["option 1"]);
+});
+
+it("calls on change callback when selected object options are changed", (): void => {
+  const onChange = jest.fn();
+
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionsObject={{key: "id", value: "name"}} onChange={onChange} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.click(screen.getAllByRole("listitem")[0]);
+
+  expect(onChange).toBeCalledWith([1]);
 });
 
 it("deselects option", (): void => {
@@ -86,7 +94,7 @@ it("deselects option", (): void => {
   userEvent.click(screen.getByRole("button"));
 
   expect(screen.getAllByRole("listitem").length).toEqual(2);
-  expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /option 1/i })).not.toBeInTheDocument();
 });
 
 it("shows options based on search", (): void => {
@@ -136,4 +144,16 @@ it("shows defined no options text", (): void => {
   userEvent.click(screen.getByRole("textbox"));
 
   expect(screen.getByText("Test no options text")).toBeInTheDocument();
+});
+
+it("shows default array option", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} defaultValues={["option 1"]} />);
+
+  expect(screen.getByRole('button', { name: /option 1/i })).toBeInTheDocument();
+});
+
+it("shows default object option", (): void => {
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionsObject={{key: "id", value: "name"}} defaultValues={[2]} />);
+
+  expect(screen.getByRole('button', { name: /option 2/i })).toBeInTheDocument();
 });

@@ -3,10 +3,13 @@ import "./style.css";
 
 export type Option = string | {[key: string]: any};
 
+export type SelectedOption = string | number;
+
 interface Props {
   options: Option[];
-  optionKey?: string;
-  onChange?: (selectedOptions: Option[]) => void;
+  defaultValues?: SelectedOption[];
+  optionsObject?: { key: string; value: string };
+  onChange?: (selectedOptions: SelectedOption[]) => void;
   disabled?: boolean;
   loading?: boolean;
   selectionLimit?: number;
@@ -18,29 +21,36 @@ interface Props {
 export const ReactMultiSearchSelect = (props: Props): ReactElement => {
   const [showOptions, setShowOptions] = useState<boolean>();
   const [search, setSearch] = useState<string>("");
-  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>(props.defaultValues || []);
 
   useEffect((): void => props.onChange && props.onChange(selectedOptions), [selectedOptions]);
+
+  const getOption = (option: Option, index = "value") => {
+    return props.optionsObject ? option[props.optionsObject[index]] : option;
+  }
 
   const toggleOptions = (): void => setShowOptions(!showOptions);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>): void => setSearch(event.target.value);
 
-  const selectOption = (value: Option): void => {
-    setSelectedOptions([...selectedOptions, value]);
+  const selectOption = (option: Option): void => {
+    setSelectedOptions([...selectedOptions, getOption(option, "key")]);
     setSearch("");
   }
 
-  const removeOption = (value: Option): void => setSelectedOptions(selectedOptions.filter((option: Option) => option !== value));
+  const removeOption = (value: SelectedOption): void => {
+    setSelectedOptions(selectedOptions.filter((option: SelectedOption) => option !== value));
+  }
 
   const filter = (option: Option): boolean => {
-    const value = props.optionKey ? option[props.optionKey] : option;
+    const key = getOption(option, "key");
+    const value = getOption(option);
 
     if (props.caseSensitiveSearch) {
-      return !selectedOptions.includes(option) && value.toString().includes(search)
+      return !selectedOptions.includes(key) && value.toString().includes(search)
     }
 
-    return !selectedOptions.includes(option) && value.toString().toLowerCase().includes(search.toLowerCase())
+    return !selectedOptions.includes(key) && value.toString().toLowerCase().includes(search.toLowerCase())
   };
 
   const renderLoading = (): ReactNode => {
@@ -70,11 +80,17 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
   };
 
   const renderSelectedOptions = (): ReactNode => {
-    return selectedOptions.map((option: Option, index: number) => (
-      <button key={index} className="react-multi-search-select-selected-option" onClick={() => removeOption(option)}>
-        {props.optionKey ? option[props.optionKey] : option}
-      </button>
-    ));
+    return selectedOptions.map((selectedOption: SelectedOption, index: number) => {
+      const option = props.optionsObject ?
+        props.options.find((option: Option) => option[props.optionsObject.key] === selectedOption)[props.optionsObject.value] :
+        selectedOption;
+
+      return (
+        <button key={index} className="react-multi-search-select-selected-option" onClick={() => removeOption(selectedOption)}>
+          {option}
+        </button>
+      );
+    });
   }
 
   const renderOptions = (): ReactNode => {
@@ -86,7 +102,7 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
 
         {options.map((option: Option, index: number) => (
           <li key={"option-" + index} onClick={() => selectOption(option)}>
-            {props.optionKey ? option[props.optionKey] : option}
+            {getOption(option)}
           </li>
         ))}
       </ul>
