@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {ReactMultiSearchSelect, SelectedOption} from "./src";
+import { ReactMultiSearchSelect } from "./src";
 
 ReactDOM.render(
   <ReactMultiSearchSelect

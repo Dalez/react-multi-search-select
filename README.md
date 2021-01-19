@@ -27,7 +27,7 @@ export const Component = (): ReactElement => {
 
       <ReactMultiSearchSelect
         options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
-        optionKey="name"
+        optionsObject={{key: "id", value: "name"}}
         onChange={onChange}
       />
     </>
@@ -43,7 +43,8 @@ export const Component = (): ReactElement => {
 | Prop  | Type  | Default | Description |
 |:--------- | :---- | :----   |:----  |
 | `options` | `array (string or key value pair)` | Required | Can either be an array of strings: `["test", "test2"]` or an array of objects: `[{ id: 1, name: "test}, { id: 2, name: "test2}]`
-| `optionKey` | `string` | `null` | The value to show when using a key value pair for the options
+| `defaultValues` | `number[] or string[]` | `null` | Default options when first loaded. This is either an array of strings or numbers that matches the key if using optionsObject
+| `optionsObject` | `object` | `null` | The key and value to show when using an array of objects for options. For example: `{key: "id", value: "name"}`
 | `onChange` | `function` | `null` | Function to call when the selected options are changed
 | `disabled` | `boolean` | `false` | Disables search input
 | `loading` | `boolean` | `false` | Disables search input and shows loading spinner
