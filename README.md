@@ -17,8 +17,8 @@ import React, { ReactElement } from 'react';
 import { ReactMultiSearchSelect } from 'react-multi-search-select';
 
 export const Component = (): ReactElement => {
-  const onChange = (options: Option[]): void => {
-    console.log(options);
+  const onChange = (selectedOptions: SelectedOption[]): void => {
+    console.log(selectedOptions);
   };
   
   return (
@@ -45,7 +45,7 @@ export const Component = (): ReactElement => {
 | `options` | `array (string or key value pair)` | Required | Can either be an array of strings: `["test", "test2"]` or an array of objects: `[{ id: 1, name: "test}, { id: 2, name: "test2}]`
 | `defaultValues` | `number[] or string[]` | `null` | Default options when first loaded. This is either an array of strings or numbers that matches the key if using optionsObject
 | `optionsObject` | `object` | `null` | The key and value to show when using an array of objects for options. For example: `{key: "id", value: "name"}`
-| `onChange` | `function` | `null` | Function to call when the selected options are changed
+| `onChange` | `function` | `null` | Function to call when the selected options are changed. Returns an array of either string or number defined by `key` if using `optionsObject`
 | `disabled` | `boolean` | `false` | Disables search input
 | `loading` | `boolean` | `false` | Disables search input and shows loading spinner
 | `selectionLimit` | `number` | `null` | The amount of selected options before the search input is disabled and no more can be selected
