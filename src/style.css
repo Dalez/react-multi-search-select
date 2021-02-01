@@ -59,27 +59,22 @@
 }
 
 .react-multi-search-select-options-container {
-  display: none;
   position: absolute;
   width: 100%;
-  background: #ffffff;
-  border-radius: 0.25em;
-  z-index: 2;
-}
-
-.react-multi-search-select-options-container.active  {
-  display: block;
-}
-
-.react-multi-search-select-options-container ul {
-  display: block;
   max-height: 15em;
   margin: 0;
   padding: 0;
   border: 1px solid #cccccc;
-  list-style: none;
+  background: #ffffff;
   border-radius: 0.25em;
+  list-style: none;
   overflow-y: auto;
+  z-index: 2;
+}
+
+.react-multi-search-select-options-container.hide  {
+  top: -9999px;
+  left: -9999px;
 }
 
 .react-multi-search-select-options-container li {

@@ -97,7 +97,7 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
     const options: Option[] = props.options.filter(filter);
 
     return (
-      <ul>
+      <ul className={"react-multi-search-select-options-container" + (showOptions ? "" : " hide")}>
         {options.length === 0 && <li className="no-hover">{props.noOptionsText || "There are no options"}</li>}
 
         {options.map((option: Option, index: number) => (
@@ -131,9 +131,7 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
         />}
       </div>
 
-      <div className={"react-multi-search-select-options-container" + (showOptions ? " active" : "")} aria-hidden={!showOptions}>
-        {renderOptions()}
-      </div>
+      {renderOptions()}
     </div>
   );
 };

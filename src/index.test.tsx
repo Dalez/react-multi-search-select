@@ -41,7 +41,7 @@ it("hides options when clicking on input field then blurring", async (): Promise
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(document.body);
 
-  await waitFor(() => expect(screen.queryByRole("list")).not.toBeInTheDocument());
+  await waitFor(() => expect(screen.queryByRole("list")).toHaveClass("hide"));
 });
 
 it("selects array option", (): void => {
