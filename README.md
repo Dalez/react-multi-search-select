@@ -69,9 +69,8 @@ You can override each class as needed. The names are "name spaced" so that they 
 | `react-multi-search-select-container input:focus` | Search input focus
 | `react-multi-search-select-selected-option` | Selected options next to the search input
 | `react-multi-search-select-selected-option:hover` | Selected options hover
-| `react-multi-search-select-options-container` | Container for options to select
-| `react-multi-search-select-options-container.active` | Container when its active (showing)
-| `react-multi-search-select-options-container ul` | List for options to select
+| `react-multi-search-select-options-container` | List for options to select
+| `react-multi-search-select-options-container.hide` | List when its inactive
 | `react-multi-search-select-options-container li` | Option to select
 | `react-multi-search-select-options-container li:not(.no-hover):hover` | No options text (for no hover effect)
 
