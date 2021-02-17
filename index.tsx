@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { ReactMultiSearchSelect } from "./src";
+import { ReactMultiSearchSelect, ReactMultiSearchSelectRef } from "./src";
 
 ReactDOM.render(
   <ReactMultiSearchSelect
@@ -28,3 +28,22 @@ ReactDOM.render(
   <ReactMultiSearchSelect options={["test", "test2", "test3"]} defaultValues={["test"]} />,
   document.getElementById("default-string-values-anchor")
 );
+
+const Ref = (): ReactElement => {
+  const ref = useRef<ReactMultiSearchSelectRef>();
+
+  const clear = (): void => ref.current.setOptions([]);
+
+  return (
+    <>
+      <button onClick={clear}>Clear All Options</button>
+      <ReactMultiSearchSelect
+        options={["test", "test2", "test3"]}
+        defaultValues={["test", "test2", "test3"]}
+        ref={ref}
+      />
+    </>
+  );
+};
+
+ReactDOM.render(<Ref />, document.getElementById("ref-anchor"));

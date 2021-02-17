@@ -1,7 +1,15 @@
-import React, {ChangeEvent, ReactElement, ReactNode, useEffect, useState} from "react";
+import React, {
+  ChangeEvent,
+  ForwardedRef,
+  forwardRef,
+  ReactElement,
+  ReactNode,
+  useEffect, useImperativeHandle,
+  useState
+} from "react";
 import "./style.css";
 
-export type Option = string | {[key: string]: any};
+export type Option = string | { [key: string]: any };
 
 export type SelectedOption = string | number;
 
@@ -18,16 +26,24 @@ interface Props {
   caseSensitiveSearch?: boolean;
 }
 
-export const ReactMultiSearchSelect = (props: Props): ReactElement => {
+export interface ReactMultiSearchSelectRef {
+  setOptions: (options: SelectedOption[]) => void;
+}
+
+export const ReactMultiSearchSelect = forwardRef<ReactMultiSearchSelectRef, Props>((props: Props, ref: ForwardedRef<ReactMultiSearchSelectRef>): ReactElement => {
   const [showOptions, setShowOptions] = useState<boolean>();
   const [search, setSearch] = useState<string>("");
   const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>(props.defaultValues || []);
 
   useEffect((): void => props.onChange && props.onChange(selectedOptions), [selectedOptions]);
 
-  const getOption = (option: Option, index = "value") => {
+  useImperativeHandle(ref, (): { setOptions: (options: SelectedOption[]) => void; } => ({
+    setOptions: (options: SelectedOption[]): void => setSelectedOptions(options)
+  }));
+
+  const getOption = (option: Option, index = "value"): SelectedOption => {
     return props.optionsObject ? option[props.optionsObject[index]] : option;
-  }
+  };
 
   const toggleOptions = (): void => setShowOptions(!showOptions);
 
@@ -36,21 +52,21 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
   const selectOption = (option: Option): void => {
     setSelectedOptions([...selectedOptions, getOption(option, "key")]);
     setSearch("");
-  }
+  };
 
   const removeOption = (value: SelectedOption): void => {
     setSelectedOptions(selectedOptions.filter((option: SelectedOption) => option !== value));
-  }
+  };
 
   const filter = (option: Option): boolean => {
     const key = getOption(option, "key");
     const value = getOption(option);
 
     if (props.caseSensitiveSearch) {
-      return !selectedOptions.includes(key) && value.toString().includes(search)
+      return !selectedOptions.includes(key) && value.toString().includes(search);
     }
 
-    return !selectedOptions.includes(key) && value.toString().toLowerCase().includes(search.toLowerCase())
+    return !selectedOptions.includes(key) && value.toString().toLowerCase().includes(search.toLowerCase());
   };
 
   const renderLoading = (): ReactNode => {
@@ -91,7 +107,7 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
         </button>
       );
     });
-  }
+  };
 
   const renderOptions = (): ReactNode => {
     const options: Option[] = props.options.filter(filter);
@@ -107,7 +123,7 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
         ))}
       </ul>
     );
-  }
+  };
 
   const selectionLimitReached: boolean = selectedOptions.length >= props.selectionLimit;
 
@@ -134,4 +150,4 @@ export const ReactMultiSearchSelect = (props: Props): ReactElement => {
       {renderOptions()}
     </div>
   );
-};
+});

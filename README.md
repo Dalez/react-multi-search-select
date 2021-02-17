@@ -13,10 +13,10 @@ npm install react-multi-search-select
 
 ## Usage
 ```ts
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { ReactMultiSearchSelect } from 'react-multi-search-select';
 
-export const Component = (): ReactElement => {
+export const Component: FC = (): ReactElement => {
   const onChange = (selectedOptions: SelectedOption[]): void => {
     console.log(selectedOptions);
   };
@@ -29,6 +29,36 @@ export const Component = (): ReactElement => {
         options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
         optionsObject={{key: "id", value: "name"}}
         onChange={onChange}
+      />
+    </>
+  );
+}
+
+```
+
+----
+
+## Ref
+
+React Multi Search Select has its own internal state. If you wish to update this internal state to match your own state,
+you can pass through a ref and call the setOptions() function.
+
+```ts
+import React, { FC, ReactElement } from 'react';
+import { ReactMultiSearchSelect } from 'react-multi-search-select';
+
+export const Component: FC = (): ReactElement => {
+  const ref = useRef<ReactMultiSearchSelectRef>();
+
+  const clear = (): void => ref.current.setOptions([]);
+
+  return (
+    <>
+      <button onClick={clear}>Clear All Options</button>
+      <ReactMultiSearchSelect
+        options={["test", "test2", "test3"]}
+        defaultValues={["test", "test2", "test3"]}
+        ref={ref}
       />
     </>
   );
@@ -52,6 +82,7 @@ export const Component = (): ReactElement => {
 | `placeholderText` | `string` | `Select` | Place holder text
 | `noOptionsText` | `string` | `There are no options` | No options text
 | `caseSensitiveSearch` | `boolean` | `false` | Sets if search is case sensitive
+| `ref` | `ReactMultiSearchSelectRef` | `null` | Allows calling some functions to update the internal state
 
 ----
 

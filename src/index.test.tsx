@@ -1,7 +1,7 @@
 import * as React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import userEvent from '@testing-library/user-event'
-import { ReactMultiSearchSelect } from "./index";
+import { ReactMultiSearchSelect, ReactMultiSearchSelectRef } from "./index";
 
 it("renders React Multi Search Select", (): void => {
   render(<ReactMultiSearchSelect options={[]} />);
@@ -156,4 +156,15 @@ it("shows default object option", (): void => {
   render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionsObject={{key: "id", value: "name"}} defaultValues={[2]} />);
 
   expect(screen.getByRole('button', { name: /option 2/i })).toBeInTheDocument();
+});
+
+it("sets options using ref", (): void => {
+  const ref = React.createRef<ReactMultiSearchSelectRef>();
+
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionsObject={{key: "id", value: "name"}} defaultValues={[1, 2]} ref={ref} />);
+
+  act(() => ref.current.setOptions([]));
+
+  expect(screen.queryByRole('button', { name: /option 1/i })).not.toBeInTheDocument();
+  expect(screen.queryByRole('button', { name: /option 2/i })).not.toBeInTheDocument();
 });

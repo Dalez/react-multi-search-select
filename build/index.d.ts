@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React from "react";
 import "../src/style.css";
 export declare type Option = string | {
     [key: string]: any;
@@ -19,5 +19,8 @@ interface Props {
     noOptionsText?: string;
     caseSensitiveSearch?: boolean;
 }
-export declare const ReactMultiSearchSelect: (props: Props) => ReactElement;
+export interface ReactMultiSearchSelectRef {
+    setOptions: (options: SelectedOption[]) => void;
+}
+export declare const ReactMultiSearchSelect: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactMultiSearchSelectRef>>;
 export {};
