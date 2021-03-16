@@ -102,7 +102,7 @@ export const ReactMultiSearchSelect = forwardRef<ReactMultiSearchSelectRef, Prop
         selectedOption;
 
       return (
-        <button key={index} className="react-multi-search-select-selected-option" onClick={() => removeOption(selectedOption)}>
+        <button key={index} type="button" className="react-multi-search-select-selected-option" onClick={() => removeOption(selectedOption)}>
           {option}
         </button>
       );
