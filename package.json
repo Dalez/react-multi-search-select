@@ -1,7 +1,10 @@
 {
   "name": "react-multi-search-select",
   "version": "1.2.2",
-  "main": "build/index.js",
+  "source": "src/index.tsx",
+  "main": "dist/index.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
   "author": "Dale Rushin <support@dalerushin.co.uk>",
   "description": "A fully tested Typescript React component that shows a multi select searchable dropdown",
   "repository": {
@@ -11,31 +14,30 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build": "webpack",
+    "build": "parcel build",
     "test": "jest --coverage"
   },
+  "files": [
+    "dist/index.css",
+    "dist/module.js",
+    "dist/types.d.ts"
+  ],
   "devDependencies": {
+    "@parcel/packager-ts": "^2.0.1",
+    "@parcel/transformer-typescript-types": "^2.0.1",
     "@testing-library/jest-dom": "^5.11",
     "@testing-library/react": "^12.1",
     "@testing-library/user-event": "^13.5",
     "@types/jest": "^27.0",
     "@types/react": "^17.0",
     "@types/react-dom": "^17.0",
-    "babel-core": "^6.26",
-    "babel-preset-env": "^1.7",
-    "babel-preset-react": "^6.24",
-    "babel-preset-stage-0": "^6.24",
-    "css-loader": "^6.5",
     "identity-obj-proxy": "^3.0",
     "jest": "^27.3",
+    "parcel": "^2.0.1",
     "react": "^17.0",
     "react-dom": "^17.0",
-    "style-loader": "^3.3",
     "ts-jest": "^27.0",
-    "ts-loader": "^9.2",
-    "typescript": "^4.5",
-    "webpack": "^5.64",
-    "webpack-cli": "^4.9"
+    "typescript": "^4.5"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
