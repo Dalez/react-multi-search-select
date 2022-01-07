@@ -41,7 +41,7 @@ it("hides options when clicking on input field then blurring", async (): Promise
   userEvent.click(screen.getByRole("textbox"));
   userEvent.click(document.body);
 
-  await waitFor(() => expect(screen.queryByRole("list")).toHaveClass("hide"));
+  await waitFor((): void => expect(screen.queryByRole("list")).toHaveClass("hide"));
 });
 
 it("selects array option", (): void => {
@@ -267,4 +267,14 @@ it("highlights first option when current index is not in options list", (): void
   expect(screen.queryByText("option 1")).toHaveClass("active");
   expect(screen.getAllByRole("listitem").length).toEqual(1);
   expect(screen.getByRole('button', { name: /option 2/i })).toBeInTheDocument();
+});
+
+it("hides options when pressing enter on an option and has reached selection limit", async (): Promise<void> => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} selectionLimit={1} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}{enter}");
+
+  expect(screen.getByRole('button', { name: /option 1/i })).toBeInTheDocument();
+  await waitFor((): void => expect(screen.queryByRole("list")).toHaveClass("hide"));
 });

@@ -37,7 +37,11 @@ export const ReactMultiSearchSelect = forwardRef<ReactMultiSearchSelectRef, Prop
   const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>(props.defaultValues || []);
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
 
-  useEffect((): void => props.onChange && props.onChange(selectedOptions), [selectedOptions]);
+  useEffect((): void => {
+    props.onChange && props.onChange(selectedOptions);
+
+    selectedOptions.length >= props.selectionLimit && setShowOptions(false);
+  }, [selectedOptions]);
 
   useEffect((): void => !showOptions && setCurrentIndex(-1), [showOptions]);
 
