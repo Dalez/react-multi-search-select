@@ -152,10 +152,22 @@ it("shows default array option", (): void => {
   expect(screen.getByRole('button', { name: /option 1/i })).toBeInTheDocument();
 });
 
+it("does not render default value when it is not in options list", (): void => {
+  render(<ReactMultiSearchSelect options={["option 2"]} defaultValues={["option 1"]} />);
+
+  expect(screen.queryByRole('button', { name: /option 1/i })).not.toBeInTheDocument();
+});
+
 it("shows default object option", (): void => {
   render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}, { id: 2, name: "option 2"}]} optionsObject={{key: "id", value: "name"}} defaultValues={[2]} />);
 
   expect(screen.getByRole('button', { name: /option 2/i })).toBeInTheDocument();
+});
+
+it("does not render default object when it is not in options list", (): void => {
+  render(<ReactMultiSearchSelect options={[{ id: 1, name: "option 1"}]} optionsObject={{key: "id", value: "name"}} defaultValues={[2]} />);
+
+  expect(screen.queryByRole('button', { name: /option 2/i })).not.toBeInTheDocument();
 });
 
 it("sets options using ref", (): void => {
@@ -167,4 +179,92 @@ it("sets options using ref", (): void => {
 
   expect(screen.queryByRole('button', { name: /option 1/i })).not.toBeInTheDocument();
   expect(screen.queryByRole('button', { name: /option 2/i })).not.toBeInTheDocument();
+});
+
+it("highlights option when pressing down arrow", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}");
+
+  expect(screen.queryByText("option 1")).toHaveClass("active");
+});
+
+it("highlights option when pressing u[ arrow", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}{arrowdown}");
+
+  expect(screen.queryByText("option 2")).toHaveClass("active");
+
+  userEvent.type(screen.getByRole("textbox"), "{arrowup}");
+
+  expect(screen.queryByText("option 1")).toHaveClass("active");
+});
+
+it("keeps highlighting top option when pressing up arrow", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}");
+
+  expect(screen.queryByText("option 1")).toHaveClass("active");
+
+  userEvent.type(screen.getByRole("textbox"), "{arrowup}");
+
+  expect(screen.queryByText("option 1")).toHaveClass("active");
+});
+
+it("keeps highlighting bottom option when pressing down arrow", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}{arrowdown}");
+
+  expect(screen.queryByText("option 2")).toHaveClass("active");
+
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}");
+
+  expect(screen.queryByText("option 2")).toHaveClass("active");
+});
+
+it("selects highlighted option", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}{enter}");
+
+  expect(screen.getAllByRole("listitem").length).toEqual(1);
+  expect(screen.getByRole('button', { name: /option 1/i })).toBeInTheDocument();
+});
+
+it("removes selected option when pressing backspace", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}{enter}");
+
+  expect(screen.getAllByRole("listitem").length).toEqual(1);
+  expect(screen.getByRole('button', { name: /option 1/i })).toBeInTheDocument();
+
+  userEvent.type(screen.getByRole("textbox"), "{backspace}");
+
+  expect(screen.getAllByRole("listitem").length).toEqual(2);
+  expect(screen.queryByRole('button', { name: /option 1/i })).not.toBeInTheDocument();
+});
+
+it("highlights first option when current index is not in options list", (): void => {
+  render(<ReactMultiSearchSelect options={["option 1", "option 2"]} />);
+
+  userEvent.click(screen.getByRole("textbox"));
+  userEvent.type(screen.getByRole("textbox"), "{arrowdown}{arrowdown}");
+
+  expect(screen.queryByText("option 2")).toHaveClass("active");
+
+  userEvent.type(screen.getByRole("textbox"), "{enter}");
+
+  expect(screen.queryByText("option 1")).toHaveClass("active");
+  expect(screen.getAllByRole("listitem").length).toEqual(1);
+  expect(screen.getByRole('button', { name: /option 2/i })).toBeInTheDocument();
 });

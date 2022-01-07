@@ -25,8 +25,22 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
+  <ReactMultiSearchSelect
+    options={[{id: 2, name: "test2"}, {id: 3, name: "test3"}]}
+    optionsObject={{key: "id", value: "name"}}
+    defaultValues={[1]}
+  />,
+  document.getElementById("default-object-values-anchor-not-in-options")
+);
+
+ReactDOM.render(
   <ReactMultiSearchSelect options={["test", "test2", "test3"]} defaultValues={["test"]} />,
   document.getElementById("default-string-values-anchor")
+);
+
+ReactDOM.render(
+  <ReactMultiSearchSelect options={["test2", "test3"]} defaultValues={["test"]} />,
+  document.getElementById("default-string-values-anchor-not-in-options")
 );
 
 const Ref = (): ReactElement => {

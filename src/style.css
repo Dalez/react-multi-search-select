@@ -81,6 +81,11 @@
   padding: 0.5em;
 }
 
+.react-multi-search-select-options-container li.active {
+  background: #90c8ea;
+  color: #ffffff;
+}
+
 .react-multi-search-select-options-container li:not(.no-hover):hover {
   background: #90c8ea;
   color: #ffffff;
