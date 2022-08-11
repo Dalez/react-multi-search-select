@@ -1,46 +1,40 @@
 import React, { ReactElement, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client";
 import { ReactMultiSearchSelect, ReactMultiSearchSelectRef } from "./src";
 
-ReactDOM.render(
-  <ReactMultiSearchSelect
-    options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
-    optionsObject={{key: "id", value: "name"}}
-  />,
-  document.getElementById("object-anchor")
+createRoot(document.getElementById("object-anchor") as HTMLElement).render(
+    <ReactMultiSearchSelect
+        options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
+        optionsObject={{key: "id", value: "name"}}
+    />
 );
 
-ReactDOM.render(
-  <ReactMultiSearchSelect options={["test", "test2", "test3"]} />,
-  document.getElementById("string-anchor")
+createRoot(document.getElementById("string-anchor") as HTMLElement).render(
+    <ReactMultiSearchSelect options={["test", "test2", "test3"]} />
 );
 
-ReactDOM.render(
-  <ReactMultiSearchSelect
-    options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
-    optionsObject={{key: "id", value: "name"}}
-    defaultValues={[1]}
-  />,
-  document.getElementById("default-object-values-anchor")
+createRoot(document.getElementById("default-object-values-anchor") as HTMLElement).render(
+    <ReactMultiSearchSelect
+        options={[{id: 1, name: "test"}, {id: 2, name: "test2"}, {id: 3, name: "test3"}]}
+        optionsObject={{key: "id", value: "name"}}
+        defaultValues={[1]}
+    />
 );
 
-ReactDOM.render(
-  <ReactMultiSearchSelect
-    options={[{id: 2, name: "test2"}, {id: 3, name: "test3"}]}
-    optionsObject={{key: "id", value: "name"}}
-    defaultValues={[1]}
-  />,
-  document.getElementById("default-object-values-anchor-not-in-options")
+createRoot(document.getElementById("default-object-values-anchor-not-in-options") as HTMLElement).render(
+    <ReactMultiSearchSelect
+        options={[{id: 2, name: "test2"}, {id: 3, name: "test3"}]}
+        optionsObject={{key: "id", value: "name"}}
+        defaultValues={[1]}
+    />
 );
 
-ReactDOM.render(
-  <ReactMultiSearchSelect options={["test", "test2", "test3"]} defaultValues={["test"]} />,
-  document.getElementById("default-string-values-anchor")
+createRoot(document.getElementById("default-string-values-anchor") as HTMLElement).render(
+    <ReactMultiSearchSelect options={["test", "test2", "test3"]} defaultValues={["test"]} />
 );
 
-ReactDOM.render(
-  <ReactMultiSearchSelect options={["test2", "test3"]} defaultValues={["test"]} />,
-  document.getElementById("default-string-values-anchor-not-in-options")
+createRoot(document.getElementById("default-string-values-anchor-not-in-options") as HTMLElement).render(
+    <ReactMultiSearchSelect options={["test2", "test3"]} defaultValues={["test"]} />
 );
 
 const Ref = (): ReactElement => {
@@ -60,4 +54,6 @@ const Ref = (): ReactElement => {
   );
 };
 
-ReactDOM.render(<Ref />, document.getElementById("ref-anchor"));
+createRoot(document.getElementById("ref-anchor") as HTMLElement).render(
+    <Ref />
+);

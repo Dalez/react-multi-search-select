@@ -43,7 +43,9 @@ export const ReactMultiSearchSelect = forwardRef<ReactMultiSearchSelectRef, Prop
     selectedOptions.length >= props.selectionLimit && setShowOptions(false);
   }, [selectedOptions]);
 
-  useEffect((): void => !showOptions && setCurrentIndex(-1), [showOptions]);
+  useEffect((): void => {
+    !showOptions && setCurrentIndex(-1);
+  }, [showOptions]);
 
   useImperativeHandle(ref, (): { setOptions: (options: SelectedOption[]) => void; } => ({
     setOptions: (options: SelectedOption[]): void => setSelectedOptions(options)
